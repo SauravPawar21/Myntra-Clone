@@ -21,21 +21,21 @@ public class cartcon {
     
     @PostMapping("/addToCart")
     public String addToCart(HttpSession session, Model model, @ModelAttribute("name") String name, @ModelAttribute("price") double price, @ModelAttribute("description") String description, @ModelAttribute("imageUrl") String imageUrl) {
-        // Retrieve cart items from session or create a new list if it doesn't exist
+        
         List<Product> cartItems = (List<Product>) session.getAttribute("cartItems");
         if (cartItems == null) {
             cartItems = new ArrayList<>();
             session.setAttribute("cartItems", cartItems);
         }
 
-        // Add the new item to the cart
+       
         Product product = new Product(name, price, description, imageUrl);
         cartItems.add(product);
 
-        // Add cartItems to the model for displaying the cart
+       
         model.addAttribute("cartItems", cartItems);
 
-        // Redirect to the cart page
+        
         return "redirect:/cart";
     }
 }
